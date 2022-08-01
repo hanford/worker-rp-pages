@@ -1,0 +1,8 @@
+{
+  "name": "dev-proxy",
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.18.1",
+    "http-proxy": "^1.18.1"
+  }
+}

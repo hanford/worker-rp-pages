@@ -1,0 +1,12 @@
+{
+  "name": "mfe-pages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "foreman start -f Procfile"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
