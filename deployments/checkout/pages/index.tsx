@@ -7,13 +7,13 @@ export default function Checkout() {
 
       <ul>
         <li>
-          <Link href="/admin">Admin</Link>
+          <a href="/admin">Admin</a>
         </li>
         <li>
-          <Link href="/order">Order</Link>
+          <a href="/order">Order</a>
         </li>
         <li>
-          <Link href="/">Menu</Link>
+          <a href="/">Menu</a>
         </li>
       </ul>
     </div>

@@ -7,13 +7,13 @@ export default function Menu() {
 
       <ul>
         <li>
-          <Link href="/admin">Admin</Link>
+          <a href="/admin">Admin</a>
         </li>
         <li>
-          <Link href="/order">Order</Link>
+          <a href="/order">Order</a>
         </li>
         <li>
-          <Link href="/checkout">Checkout</Link>
+          <a href="/checkout">Checkout</a>
         </li>
       </ul>
     </div>

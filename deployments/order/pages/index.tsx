@@ -7,13 +7,13 @@ export default function Order() {
 
       <ul>
         <li>
-          <Link href="/admin">Admin</Link>
+          <a href="/admin">Admin</a>
         </li>
         <li>
-          <Link href="/">Menu</Link>
+          <a href="/">Menu</a>
         </li>
         <li>
-          <Link href="/checkout">Checkout</Link>
+          <a href="/checkout">Checkout</a>
         </li>
       </ul>
     </div>
