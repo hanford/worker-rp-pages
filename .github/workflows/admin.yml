@@ -8,9 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ^6
+      - run: pnpm build -F admin
+
       - uses: actions/checkout@v3
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pnpm build -F admin && cd deployments/admin && pages publish --project-name=admin-mfe
+          command: cd deployments/admin && pages publish --project-name=admin-mfe
