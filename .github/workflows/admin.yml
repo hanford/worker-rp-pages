@@ -13,5 +13,6 @@ jobs:
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
+          apiKey: ${{ secrets.CF_API_KEY }}
           email: ${{ secrets.CF_ACCOUNT_EMAIL }}
           command: pnpm build -F admin && cd deployments/admin && pages publish --project-name=admin-mfe
