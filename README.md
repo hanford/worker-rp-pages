@@ -1,1 +1,1 @@
-POC of many frontnend applications on cloudlfare pages
+POC of many frontend applications on cloudlfare pages
