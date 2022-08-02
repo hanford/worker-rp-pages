@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Order() {
   return (
     <div>
-      <h2>Order</h2>
+      <h2>Order App</h2>
 
       <ul>
         <li>

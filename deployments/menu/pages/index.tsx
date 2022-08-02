@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Menu() {
   return (
     <div>
-      <h2>Menu</h2>
+      <h2>Menu App</h2>
 
       <ul>
         <li>
