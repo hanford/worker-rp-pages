@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Order() {
+export default function OrderId() {
+  const router = useRouter();
   return (
     <div>
-      <h2>Order App</h2>
+      <h2>Order: {router.query.orderId}</h2>
 
       <ul>
         <li>
@@ -16,7 +18,7 @@ export default function Order() {
           <a href="/checkout">Checkout</a>
         </li>
         <li>
-          <Link href="/123-123">Order 123</Link>
+          <Link href="/">Order index</Link>
         </li>
       </ul>
     </div>

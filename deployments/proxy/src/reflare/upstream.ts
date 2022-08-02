@@ -13,8 +13,6 @@ export const getURL = (url: string, upstream: UpstreamOptions): string => {
   const cloneURL = new URL(url);
   const { domain, port, protocol, pathRewrite } = upstream;
 
-  console.log({ cloneURL, upstream });
-
   cloneURL.hostname = domain;
 
   if (protocol !== undefined) {
