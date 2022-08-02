@@ -1,7 +1,6 @@
 {
-  "name": "deploy-proxy",
+  "name": "proxy",
   "version": "1.0.0",
-  "description": "🚀 The template to kickstart Reflare",
   "main": "dist/worker.js",
   "private": true,
   "scripts": {
