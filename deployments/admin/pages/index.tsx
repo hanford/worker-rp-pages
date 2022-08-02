@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Admin() {
   return (
     <div>
-      <h2>Admin</h2>
+      <h2>Admin app</h2>
 
       <ul>
         <li>
