@@ -1,9 +1,9 @@
-name = 'template'
+name = 'store'
 type = 'javascript'
-account_id = ''
-usage_model = ''
+
 workers_dev = true
 compatibility_date = "2022-02-16"
+main = "./dist/worker.js"
 
 [build]
 command = "npm install && npm run build"
