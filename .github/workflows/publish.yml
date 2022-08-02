@@ -1,0 +1,30 @@
+name: Worker Publish to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    name: Build and Publish
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "npm"
+
+      - name: Install dependencies
+        uses: pnpm/action-setup@v2
+        with:
+          version: ^6
+
+      # - name: Publish
+      #   uses: cloudflare/wrangler-action@1.3.0
+      #   with:
+      #     apiToken: ${{ secrets.CF_API_TOKEN }}
+      #   env:
+      #     CF_ACCOUNT_ID: ${{secrets.CF_ACCOUNT_ID}}

@@ -1,0 +1,31 @@
+{
+  "name": "deploy-proxy",
+  "version": "1.0.0",
+  "description": "🚀 The template to kickstart Reflare",
+  "main": "dist/worker.js",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "dev": "miniflare",
+    "deploy": "wrangler publish",
+    "lint": "eslint . --fix --ext .ts"
+  },
+  "author": "Xiaoyang Liu <siujoeng.lau@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.4",
+    "@typescript-eslint/parser": "^5.30.4",
+    "clean-webpack-plugin": "^4.0.0",
+    "eslint": "^8.19.0",
+    "miniflare": "^2.5.1",
+    "ts-loader": "^9.3.1",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "reflare": "^1.0.1"
+  }
+}
