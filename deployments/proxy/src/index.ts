@@ -1,109 +1,123 @@
-// import useReflare from "reflare";
+import useReflare from "./reflare";
 
-// const handleRequest = async (request: Request): Promise<Response> => {
-//   const reflare = await useReflare();
+const handleRequest = async (request: Request): Promise<Response> => {
+  const reflare = await useReflare();
 
-//   const isLocalRequest = request.url.includes("localhost");
+  const isLocalRequest = request.url.includes("localhost");
 
-//   console.log(request.url);
+  console.log(request.url);
 
-//   reflare.push({
-//     path: "/order*",
-//     upstream: {
-//       domain: isLocalRequest ? "localhost" : "order.jackhanford.com",
-//       protocol: isLocalRequest ? "http" : "https",
-//       port: isLocalRequest ? 4999 : undefined,
-//     },
-//   });
+  reflare.push({
+    path: "/order*",
+    upstream: {
+      domain: isLocalRequest ? "localhost" : "order.jackhanford.com",
+      protocol: isLocalRequest ? undefined : "https",
+      port: isLocalRequest ? 4999 : undefined,
+      pathRewrite: (path) => {
+        if (isLocalRequest) return path;
+        return path.replace("/order", "");
+      },
+    },
+  });
 
-//   reflare.push({
-//     path: "/admin",
-//     upstream: {
-//       domain: isLocalRequest ? "localhost" : "admin-mfe.pages.dev",
-//       protocol: isLocalRequest ? "http" : "https",
-//       port: isLocalRequest ? 4997 : 80,
-//     },
-//   });
+  reflare.push({
+    path: "/admin*",
+    upstream: {
+      domain: isLocalRequest ? "localhost" : "admin.jackhanford.com",
+      protocol: isLocalRequest ? undefined : "https",
+      port: isLocalRequest ? 4997 : 80,
+      pathRewrite: (path) => {
+        if (isLocalRequest) return path;
+        return path.replace("/admin", "");
+      },
+    },
+  });
 
-//   reflare.push({
-//     path: "/checkout*",
-//     upstream: {
-//       domain: isLocalRequest ? "localhost" : "checkout.jackhanford.com",
-//       protocol: isLocalRequest ? "http" : "https",
-//       port: isLocalRequest ? 4998 : undefined,
-//     },
-//   });
+  reflare.push({
+    path: "/checkout*",
+    upstream: {
+      domain: isLocalRequest ? "localhost" : "checkout.jackhanford.com",
+      protocol: isLocalRequest ? undefined : "https",
+      port: isLocalRequest ? 4998 : undefined,
+      pathRewrite: (path) => {
+        if (isLocalRequest) return path;
+        return path.replace("/checkout", "");
+      },
+    },
+  });
 
-//   reflare.push({
-//     path: "/*",
-//     upstream: {
-//       domain: isLocalRequest ? "localhost" : "menu.jackhanford.com",
-//       protocol: isLocalRequest ? "http" : "https",
-//       port: isLocalRequest ? 4996 : undefined,
-//     },
-//   });
+  reflare.push({
+    path: "/*",
+    upstream: {
+      domain: isLocalRequest ? "localhost" : "menu.jackhanford.com",
+      protocol: isLocalRequest ? "http" : "https",
+      port: isLocalRequest ? 4996 : undefined,
+    },
+  });
 
-//   return reflare.handle(request);
-// };
-
-// addEventListener("fetch", (event) => {
-//   event.respondWith(handleRequest(event.request));
-// });
+  return reflare.handle(request);
+};
 
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
 
-const map = {
-  order: {
-    dev: "localhost",
-    port: "4999",
-    prod: "https://order.jackhanford.com",
-  },
-  checkout: {
-    dev: "localhost",
-    port: "4998",
-    prod: "https://checkout.jackhanford.com",
-  },
-  admin: {
-    dev: "localhost",
-    port: "4997",
-    prod: "https://admin.jackhanford.com",
-  },
-  menu: {
-    dev: "localhost",
-    port: "4996",
-    prod: "https://menu.jackhanford.com",
-  },
-};
+// addEventListener("fetch", (event) => {
+//   event.respondWith(handleRequest(event.request));
+// });
 
-async function handleRequest(request: Request) {
-  const url = new URL(request.url);
+// const map = {
+//   order: {
+//     dev: "localhost",
+//     port: "4999",
+//     prod: "https://order.jackhanford.com",
+//   },
+//   checkout: {
+//     dev: "localhost",
+//     port: "4998",
+//     prod: "https://checkout.jackhanford.com",
+//   },
+//   admin: {
+//     dev: "localhost",
+//     port: "4997",
+//     prod: "https://admin.jackhanford.com",
+//   },
+//   menu: {
+//     dev: "localhost",
+//     port: "4996",
+//     prod: "https://menu.jackhanford.com",
+//   },
+// };
 
-  const { pathname, hostname } = url;
+// async function handleRequest(request: Request) {
+//   const url = new URL(request.url);
 
-  const isLocal = hostname.includes("localhost");
-  const envKey = isLocal ? "dev" : "prod";
-  let destination = "menu";
+//   const { pathname, hostname } = url;
 
-  if (pathname.startsWith("/admin")) {
-    destination = "admin";
-  } else if (pathname.startsWith("/checkout")) {
-    destination = "checkout";
-  } else if (pathname.startsWith("/order")) {
-    destination = "order";
-  }
+//   const isLocal = hostname.includes("localhost");
+//   const envKey = isLocal ? "dev" : "prod";
+//   let destination = "menu";
 
-  if (isLocal) {
-    url.port = map[destination].port;
-  } else {
-    url.pathname = url.pathname.replace(`/${destination}`, "");
-  }
+//   if (pathname.startsWith("/admin")) {
+//     destination = "admin";
+//   } else if (pathname.startsWith("/checkout")) {
+//     destination = "checkout";
+//   } else if (pathname.startsWith("/order")) {
+//     destination = "order";
+//   }
 
-  url.hostname = map[destination][envKey];
+//   if (isLocal) {
+//     url.port = map[destination].port;
+//   } else {
+//     url.pathname = url.pathname.replace(`/${destination}`, "");
+//   }
 
-  // eslint-disable-next-line
-  // @ts-ignore
-  const response = await fetch(url, request);
-  return response;
-}
+//   url.hostname = map[destination][envKey];
+
+//   console.log({ url });
+
+//   // eslint-disable-next-line
+//   // @ts-ignore
+//   const response = await fetch(url, request);
+//   return response;
+// }
