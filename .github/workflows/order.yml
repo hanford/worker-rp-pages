@@ -1,0 +1,25 @@
+on:
+  pull_request:
+    branches: [main]
+  push:
+    paths:
+      - deployments/order/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/order@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ^6
+      - name: Build
+        run: pnpm install && pnpm build -F order
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "order-mfe"
+          command: pages publish --project-name=order-mfe --directory=./deployments/order/out

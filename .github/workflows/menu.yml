@@ -1,0 +1,25 @@
+on:
+  pull_request:
+    branches: [main]
+  push:
+    paths:
+      - deployments/menu/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/menu@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ^6
+      - name: Build
+        run: pnpm install && pnpm build -F menu
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "menu-mfe"
+          command: pages publish --project-name=menu-mfe --directory=./deployments/menu/out
