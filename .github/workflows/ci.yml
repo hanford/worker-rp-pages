@@ -1,4 +1,7 @@
-on: [push]
+on:
+  push:
+    paths:
+      - deployments/admin/**
 
 jobs:
   deploy:
