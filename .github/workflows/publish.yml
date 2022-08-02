@@ -23,9 +23,8 @@ jobs:
           version: ^6
 
       - name: Publish
-        uses: cloudflare/wrangler-action@1.3.0
+        uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: ./deployments/proxy
-        env:
-          CF_ACCOUNT_ID: ${{secrets.CF_ACCOUNT_ID}}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
