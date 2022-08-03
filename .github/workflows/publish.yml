@@ -1,0 +1,31 @@
+name: Proxy Publish to Cloudflare
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    name: Build and Publish
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        uses: pnpm/action-setup@v2
+        with:
+          version: ^6
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          workingDirectory: ./deployments/proxy
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "admin"

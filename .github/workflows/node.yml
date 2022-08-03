@@ -1,0 +1,30 @@
+name: Worker Lint and Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ^6
+
+      - name: Install Deps
+        run: pnpm install
+
+      - name: ESLint
+        run: pnpm run lint -F proxy
+
+      - name: Build
+        run: pnpm build -F proxy
