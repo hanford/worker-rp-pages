@@ -1,10 +1,7 @@
-name: Worker Lint and Build
+name: Proxy lint & build
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 

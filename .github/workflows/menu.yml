@@ -1,9 +1,12 @@
+name: Deploy Menu Pages
+
 on:
-  pull_request:
-    branches: [main]
   push:
-    paths:
-      - deployments/menu/**
+    branches:
+      - main
+  # push:
+  #   paths:
+  #     - deployments/menu/**
 
 jobs:
   deploy:

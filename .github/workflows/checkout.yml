@@ -1,9 +1,12 @@
+name: Deploy Checkout Pages
+
 on:
-  pull_request:
-    branches: [main]
   push:
-    paths:
-      - deployments/checkout/**
+    branches:
+      - main
+  # push:
+  #   paths:
+  #     - deployments/checkout/**
 
 jobs:
   deploy:

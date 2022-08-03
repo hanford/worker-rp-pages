@@ -1,12 +1,12 @@
-name: Proxy Publish to Cloudflare
+name: Proxy worker publish
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
   build-and-publish:
@@ -28,4 +28,4 @@ jobs:
           workingDirectory: ./deployments/proxy
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: "admin"
+          projectName: "store"

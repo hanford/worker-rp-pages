@@ -14,6 +14,10 @@ const handleRequest = async (request: Request): Promise<Response> => {
       protocol: isLocalRequest ? undefined : "https",
       port: isLocalRequest ? 4999 : undefined,
       pathRewrite: (path) => {
+        console.log({ path });
+        // const matchingRoute = routes.find((k) => {
+        //   return k.dynamic ? route.match(new RegExp(k.regex)) : k.src === route;
+        // });
         if (isLocalRequest) return path;
         return path.replace("/order", "");
       },
@@ -61,63 +65,3 @@ const handleRequest = async (request: Request): Promise<Response> => {
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
-
-// addEventListener("fetch", (event) => {
-//   event.respondWith(handleRequest(event.request));
-// });
-
-// const map = {
-//   order: {
-//     dev: "localhost",
-//     port: "4999",
-//     prod: "https://order.jackhanford.com",
-//   },
-//   checkout: {
-//     dev: "localhost",
-//     port: "4998",
-//     prod: "https://checkout.jackhanford.com",
-//   },
-//   admin: {
-//     dev: "localhost",
-//     port: "4997",
-//     prod: "https://admin.jackhanford.com",
-//   },
-//   menu: {
-//     dev: "localhost",
-//     port: "4996",
-//     prod: "https://menu.jackhanford.com",
-//   },
-// };
-
-// async function handleRequest(request: Request) {
-//   const url = new URL(request.url);
-
-//   const { pathname, hostname } = url;
-
-//   const isLocal = hostname.includes("localhost");
-//   const envKey = isLocal ? "dev" : "prod";
-//   let destination = "menu";
-
-//   if (pathname.startsWith("/admin")) {
-//     destination = "admin";
-//   } else if (pathname.startsWith("/checkout")) {
-//     destination = "checkout";
-//   } else if (pathname.startsWith("/order")) {
-//     destination = "order";
-//   }
-
-//   if (isLocal) {
-//     url.port = map[destination].port;
-//   } else {
-//     url.pathname = url.pathname.replace(`/${destination}`, "");
-//   }
-
-//   url.hostname = map[destination][envKey];
-
-//   console.log({ url });
-
-//   // eslint-disable-next-line
-//   // @ts-ignore
-//   const response = await fetch(url, request);
-//   return response;
-// }

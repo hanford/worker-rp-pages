@@ -1,9 +1,12 @@
+name: Deploy Admin Pages
+
 on:
-  pull_request:
-    branches: [main]
   push:
-    paths:
-      - deployments/admin/**
+    branches:
+      - main
+  # push:
+  #   paths:
+  #     - deployments/admin/**
 
 jobs:
   deploy:

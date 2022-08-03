@@ -1,9 +1,12 @@
+name: Deploy Order Pages
+
 on:
-  pull_request:
-    branches: [main]
   push:
-    paths:
-      - deployments/order/**
+    branches:
+      - main
+  # push:
+  #   paths:
+  #     - deployments/order/**
 
 jobs:
   deploy:
