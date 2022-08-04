@@ -1,4 +1,4 @@
-import { decode } from "next-static-manifest/dist/utils";
+import { decode } from "nsm-fork/dist/utils";
 import encodedManifest from "./next-static-manifest.json";
 
 const manifest = decode(JSON.stringify(encodedManifest));
