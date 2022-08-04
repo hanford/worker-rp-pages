@@ -4,8 +4,7 @@
     "check": "tsc --noEmit",
     "dev": "next dev -p $PORT",
     "start": "next start",
-    "build": "next build && next export && nsm && mv ./out/next-static-manifest.json ./functions/ && cp -r functions out",
-    "deploy": ""
+    "build": "node node_modules/nsm-fork/dist/index.js && next build && next export && cp -r functions out"
   },
   "dependencies": {
     "next": "12.1.0",
