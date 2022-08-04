@@ -1,4 +1,5 @@
 import { decode } from "next-static-manifest/dist/utils";
+// @ts-expect-error
 import encodedManifest from "./next-static-manifest.json";
 
 const manifest = decode(JSON.stringify(encodedManifest));
