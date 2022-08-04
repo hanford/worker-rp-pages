@@ -25,5 +25,4 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: ./deployments/order
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: "order-mfe"
           command: pages publish --project-name=order-mfe out
