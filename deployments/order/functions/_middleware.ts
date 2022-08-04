@@ -1,10 +1,9 @@
 import { decode } from "next-static-manifest/dist/utils";
-// @ts-expect-error
 import encodedManifest from "./next-static-manifest.json";
 
 const manifest = decode(JSON.stringify(encodedManifest));
 
-const dynamicRouteMiddleware = async ({ next, request }) => {
+const dynamicRouteMiddleware: PagesFunction = async ({ next, request }) => {
   const url = new URL(request.url);
 
   if (url.pathname.startsWith("/order")) {
@@ -21,11 +20,21 @@ const dynamicRouteMiddleware = async ({ next, request }) => {
     url.pathname = matchingRoute.src;
   }
 
-  console.log({ url });
+  const response = await next(
+    new Request(url, {
+      // https://discord.com/channels/595317990191398933/910978223968518144/1004857811513131038
+      // https://github.com/cloudflare/wrangler2/issues/370
+      // @ts-expect-error
+      cf: request.cf,
+    })
+  );
 
-  const response = await next(new Request(url.href));
+  if (matchingRoute) {
+    response.headers.set("x-match", matchingRoute.src);
+  }
 
-  response.headers.set("_middleware", true);
+  response.headers.set("x-middleware", url.href);
+  response.headers.set("x-manifest", JSON.stringify(manifest));
 
   return response;
 };
