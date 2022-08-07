@@ -15,9 +15,6 @@ const handleRequest = async (request: Request): Promise<Response> => {
       port: isLocalRequest ? 4999 : undefined,
       pathRewrite: (path) => {
         console.log({ path });
-        // const matchingRoute = routes.find((k) => {
-        //   return k.dynamic ? route.match(new RegExp(k.regex)) : k.src === route;
-        // });
         if (isLocalRequest) return path;
         return path.replace("/order", "");
       },
