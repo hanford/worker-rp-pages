@@ -1,10 +1,11 @@
 {
   "name": "order",
   "scripts": {
-    "check": "tsc --noEmit",
-    "dev": "next dev -p $PORT",
+    "generate-nsm": "node node_modules/nsm-fork/dist/index.js",
+    "check": "npm run generate-nsm && tsc --noEmit",
+    "dev": "npm run generate-nsm && next dev -p $PORT",
     "start": "next start",
-    "build": "node node_modules/nsm-fork/dist/index.js && next build && next export"
+    "build": "npm run generate-nsm && next build && next export"
   },
   "dependencies": {
     "next": "12.1.0",

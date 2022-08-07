@@ -17,8 +17,16 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: ^6
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Typecheck
+        run: pnpm check -F menu
+
       - name: Build
-        run: pnpm install && pnpm build -F menu
+        run: pnpm build -F menu
+
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:

@@ -6,3 +6,4 @@ package-lock.json
 **next-static-manifest.json
 dist/
 *.log
+*.tsbuildinfo
