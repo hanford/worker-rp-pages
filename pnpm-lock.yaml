@@ -29,7 +29,7 @@ importers:
       '@cloudflare/workers-types': ^3.14.0
       '@types/node': ^18.6.3
       '@types/react': 17.0.2
-      '@types/react-dom': ^17.0.2
+      '@types/react-dom': 17.0.2
       next: 12.1.0
       nsm-fork: workspace:^0.7.0
       react: 17.0.2
@@ -44,7 +44,7 @@ importers:
       '@cloudflare/workers-types': 3.14.1
       '@types/node': 18.6.3
       '@types/react': 17.0.2
-      '@types/react-dom': 17.0.17
+      '@types/react-dom': 17.0.2
       typescript: 4.7.4
 
   deployments/menu:
@@ -2620,6 +2620,12 @@ packages:
     resolution: {integrity: sha512-VjnqEmqGnasQKV0CWLevqMTXBYG9GbwuE6x3VetERLh0cq2LTptFE73MrQi2S7GkKXCf2GgwItB/melLnxfnsg==}
     dependencies:
       '@types/react': 17.0.2
+    dev: true
+
+  /@types/react-dom/17.0.2:
+    resolution: {integrity: sha512-Icd9KEgdnFfJs39KyRyr0jQ7EKhq8U6CcHRMGAS45fp5qgUvxL3ujUCfWFttUK2UErqZNj97t9gsVPNAqcwoCg==}
+    dependencies:
+      '@types/react': 18.0.15
     dev: true
 
   /@types/react-dom/18.0.6:
